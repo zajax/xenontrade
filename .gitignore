@@ -31,6 +31,7 @@ bower_components
 
 # Compiled binary addons (https://nodejs.org/api/addons.html)
 build/Release
+build/config.gypi
 
 # Dependency directories
 node_modules/
@@ -66,3 +67,6 @@ typings/
 dist
 build/old
 gh_token.yml
+
+.idea
+*.iml

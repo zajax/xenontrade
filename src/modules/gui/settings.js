@@ -25,29 +25,34 @@ class SettingsGUI {
   * Creates the settings window
   */
   static create() {
-    var settingsWindow = windowManager.createNew(SettingsGUI.NAME, 'XenonTrade Settings', '/settings.html', false, {
-      'width': 800,
-      'height': 600,
-      'position': 'center',
-      'frame': false,
-      'backgroundThrottling': false,
-      'skipTaskbar': true,
-      'show': false,
-      'maximizable': false,
-      'resizable': false,
-      'fullscreenable': false,
-      'alwaysOnTop': true
-    });
 
-    settingsWindow.open(null, true);
+      var settingsWindow = windowManager.createNew(SettingsGUI.NAME, 'XenonTrade Settings', '/settings.html', false, {
+        'width': 800,
+        'height': 600,
+        'position': 'center',
+        'frame': false,
+        'backgroundThrottling': false,
+        'skipTaskbar': true,
+        'show': false,
+        'maximizable': false,
+        'resizable': false,
+        'fullscreenable': false,
+        'alwaysOnTop': true,
+        webPreferences: {
+          nodeIntegration: true,
+        },
+      });
 
-    settingsWindow.object.on("hide", function() {
-      windowManager.bridge.emit('hide', {'window': SettingsGUI.NAME});
-    });
+      settingsWindow.open(null, true);
 
-    settingsWindow.object.on("show", function() {
-      windowManager.bridge.emit('show', {'window': SettingsGUI.NAME});
-    });
+      settingsWindow.object.on("hide", function() {
+        windowManager.bridge.emit('hide', {'window': SettingsGUI.NAME});
+      });
+
+      settingsWindow.object.on("show", function() {
+        windowManager.bridge.emit('show', {'window': SettingsGUI.NAME});
+      });
+
   }
 
   /**
@@ -160,9 +165,9 @@ class SettingsGUI {
   * Initializes the maximum height sliders maximum value
   */
   static _initializeMaxHeightSlider() {
-    var mainScreen = screenElectron.getPrimaryDisplay();
-    var sliderDiv = $("[data-slider='maxHeight']").find("[slider-max]");
-    sliderDiv.attr("slider-max", mainScreen.size.height);
+    // var mainScreen = screenElectron.getPrimaryDisplay();
+    // var sliderDiv = $("[data-slider='maxHeight']").find("[slider-max]");
+    // sliderDiv.attr("slider-max", mainScreen.size.height);
   }
 
   /**

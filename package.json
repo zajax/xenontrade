@@ -1,71 +1,68 @@
 {
   "name": "XenonTrade",
-  "version": "0.4.1",
+  "version": "0.6.0",
   "description": "Path of Exile trading app for price checking and whisper management",
   "main": "src/main.js",
   "scripts": {
     "postinstall": "electron-builder install-app-deps",
     "start": "npm install && electron ./",
     "electron": "electron ./",
-    "dist-linux": "build",
-    "dist-win": "build --win",
-    "publish-linux": "build --linux --publish always",
-    "publish-win": "build --win --publish always"
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder"
   },
   "keywords": [
     "poe",
     "path of exile",
     "trade",
-    "tool",
-    "linux"
+    "tool"
   ],
-  "homepage": "https://github.com/klayveR/xenontrade#readme",
+  "homepage": "https://github.com/zajax/xenontrade#readme",
   "bugs": {
-    "url": "https://github.com/klayveR/xenontrade/issues"
+    "url": "https://github.com/zajax/xenontrade/issues"
   },
   "author": {
     "name": "Tobias Hoffmann",
     "email": "tobiashoffmann7@gmail.com",
     "url": "http://klayver.de"
   },
+  "contributors": [
+    {
+      "name": "Ben Zajac"
+    }
+  ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/klayveR/xenontrade.git"
+    "url": "https://github.com/zajax/xenontrade.git"
   },
   "license": "MIT",
   "dependencies": {
-    "active-win": "^3.0.0",
+    "active-win": "git@github.com:timsu/active-win.git",
     "child-process-es6-promise": "^1.2.0",
     "clipboardy": "github:klayveR/clipboardy",
-    "electron-is-dev": "^0.3.0",
-    "electron-log": "^2.2.17",
-    "electron-store": "^2.0.0",
-    "electron-updater": "^3.1.2",
+    "electron-is-dev": "^1.1.0",
+    "electron-log": "^4.1.1",
+    "electron-store": "^5.1.1",
+    "electron-updater": "^4.2.5",
     "electron-window-manager": "^1.0.6",
-    "ffi": "^2.2.0",
-    "iohook": "^0.2.0",
+    "ffi-napi": "^2.4.7",
+    "iohook": "^0.6.5",
     "jquery": "^3.4.1",
     "js-base64": "^2.4.9",
     "poe-ninja-api-manager": "^0.7.0",
     "poedata": "^1.0.0",
-    "promise-fs": "^1.3.0",
+    "promise-fs": "^2.1.1",
     "request-promise-native": "^1.0.5",
     "underscore": "^1.9.1",
     "x11": "^2.3.0",
     "x11-prop": "^0.4.3"
   },
-  "cmake-js": {
-    "runtime": "electron",
-    "runtimeVersion": "2.0.10"
-  },
   "iohook": {
     "targets": [
-      "node-57",
-      "electron-57"
+      "node-72",
+      "electron-76"
     ],
     "platforms": [
-      "win32",
-      "linux"
+      "win32"
     ],
     "arches": [
       "x64",
@@ -73,7 +70,7 @@
     ]
   },
   "build": {
-    "appId": "de.klayver.xenontrade",
+    "appId": "zajax.xenontrade",
     "files": [
       "**/*",
       "!**/{*.md,.DS_Store,.git,.hg,.svn,CVS,RCS,SCCS,__pycache__,thumbs.db,.gitignore,.gitattributes,.editorconfig,.flowconfig,.yarn-metadata.json,.idea,appveyor.yml,.travis.yml,circle.yml,npm-debug.log,.nyc_output,yarn.lock,.yarn-integrity}",
@@ -83,13 +80,6 @@
     "asarUnpack": [
       "*.node"
     ],
-    "linux": {
-      "icon": "build/icon.icns",
-      "target": [
-        "AppImage"
-      ],
-      "category": "Game"
-    },
     "win": {
       "icon": "build/icon.ico",
       "target": "nsis"
@@ -101,7 +91,8 @@
     }
   },
   "devDependencies": {
-    "electron": "^2.0.10",
-    "electron-builder": "^20.28.3"
+    "electron": "^8.2.0",
+    "electron-builder": "^22.4.1",
+    "electron-rebuild": "^1.10.1"
   }
 }

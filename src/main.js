@@ -18,6 +18,7 @@ autoUpdater.autoDownload = false;
 log.transports.file.format = '[{d}/{m}/{y} {h}:{i}:{s}] [{level}] {text}';
 log.transports.console.format = '[{d}/{m}/{y} {h}:{i}:{s}] [{level}] {text}';
 
+
 // Create XenonTrade window
 function createWindow() {
   windowManager.init({
@@ -38,14 +39,17 @@ function createWindow() {
     'maximizable': false,
     'resizable': false,
     'fullscreenable': false,
-    'alwaysOnTop': true
+    'alwaysOnTop': true,
+    webPreferences: {
+      nodeIntegration: true,
+    },
   });
 
   win = mainWindow.object;
-
   // Open dev tools when debug is enabled
-  if(debug) {
-    win.setSize(800, 600);
+  if(isDev) {
+    console.log("DEV MODE");
+    win.setSize(1200, 800);
     win.webContents.openDevTools();
   }
 
@@ -83,19 +87,20 @@ function createTray() {
 }
 
 // Only allow one instance of XenonTrade
-let shouldQuit = app.makeSingleInstance(function(commandLine, workingDirectory) {
-  if(win) {
-    if(win.isMinimized()) {
-      win.restore();
-    }
+let gotLock = app.requestSingleInstanceLock();
 
-    win.focus();
-  }
-});
-
-if(shouldQuit) {
+if(!gotLock) {
   app.quit();
   return;
+} else {
+  app.on('second-instance', (event, commandLine, workingDirectory) => {
+    if (win) {
+      if (win.isMinimized()) {
+        win.restore();
+      }
+      win.focus();
+    }
+  });
 }
 
 // This method will be called when Electron has finished

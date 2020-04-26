@@ -149,11 +149,7 @@ class AutoMinimize {
   * @returns {boolean}
   */
   _isNewWindowTitle(windowTitle) {
-    if(windowTitle !== this.previousWindowTitle) {
-      return true;
-    }
-
-    return false;
+    return windowTitle !== this.previousWindowTitle;
   }
 
   /**
@@ -198,6 +194,7 @@ class AutoMinimize {
       app.poeFocused = false;
     } else if(windowTitle === "Path of Exile") {
       app.poeFocused = true;
+      console.log("POE Focused");
       if(config.get("autoMinimize")) { GUI.show(true); }
     } else {
       app.poeFocused = false;
